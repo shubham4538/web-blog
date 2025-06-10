@@ -3,8 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const connectMongoDB = require("./connection");
-const BlogModel = require("./BlogModel.js");
+const connectMongoDB = require("./database/connection.js");
+const BlogModel = require("./database/BlogModel.js");
 
 const app = express();
 const port = process.env.PORT || 3001;
