@@ -1,0 +1,52 @@
+---
+title: React Vite PWA Setup
+description: Setting up PWA for Vite React Apps
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742385217/WebBlog/aabzwcg1axvwfgrdlcvy.png
+  alt: React PWA
+tags: [PWA, React, Vite]
+date: 2025-3-19
+---
+
+# React PWA Setup
+
+## Steps to Install Tailwind for React Applications
+1. Generate Assets and Load.
+2. Add link to html file.
+3. Install Dependencies.
+4. Build and Run.
+
+<br/>
+
+### 1. Generate Assets
+- Firstly generate all the required Assets such as Favicon, Maskable Image, Manifest file using [this](https://realfavicongenerator.net) website.
+- Then extract the downloaded folder in the `public` folder of the project directory.
+<br/>
+
+### 2. Add link to html file 
+> Add the following link in the `head` part of the `index.html` file located in your project directory
+```
+<link rel="manifest" href="/manifest.json" />
+```
+<br/>
+
+### 3. Install Dependencies
+> Install the `vite-plugin-pwa` dependency
+```
+npm i vite-plugin-pwa
+```
+<br/>
+
+### 4. Build and Run 
+> Once all the installation and configuration is completed, build and start the dev server
+```
+npm run build
+```
+```
+npm run start
+```
+<br/>
+#### After restarting the server, you will now see the Install Button on the website🎉🎉
+##### Check [here](https://vite-pwa-org.netlify.app/) for any ⚠️problem related to installation
+<br/>
+<br/>

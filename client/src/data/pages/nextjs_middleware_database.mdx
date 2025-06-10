@@ -1,0 +1,128 @@
+---
+title: How to Connect to a Database in Next.js Middleware (The Right Way)
+description: Next.js Middleware runs on the Edge Runtime and doesn’t support direct database connections. Learn the correct way to access databases using internal API routes from middleware.
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1747323162/WebBlog/1NDNwcQF53L56yV_JheL3uw_aycsen.jpg
+  alt: nextjs cookies headers
+tags: [NextJs, Cookies, Headers]
+date: 2025-05-17
+---
+
+# How to Connect to a Database in Next.js Middleware (The Right Way)
+
+Next.js Middleware is a powerful feature that allows you to run code before a request is processed — great for handling things like authentication, redirects, and custom logic. But one common question developers face is: **can we connect to a database inside middleware?**
+
+The short answer: **Not directly.**
+
+In this post, we'll explore why direct database access isn’t supported in middleware, and how you can work around this limitation using `API routes` — the right way to integrate database logic into your middleware flow.
+
+## 🛠️ Steps to Safely Use a Database in Next.js Middleware
+
+If you're using custom middleware on the Node.js runtime (not the Edge Runtime), you can safely connect to your database directly within your middleware logic. Below are the essential steps to set this up and apply it across specific routes in your Next.js application.
+
+### 1. **Create a Middleware File**
+Add a `middleware.ts` or `middleware.js` file in the admin folder. Since we are nor using the default middleware, we will create a custom one where aur protected routes will be create.
+
+For eg: `<root>/pages/api/admin/middleware.js`
+
+```
+const authMiddleware = (handler) => async (req, res) => {};
+
+export default authMiddleware;
+```
+
+> This is a custom logic that will check all specified routes for authentication.
+<br/>
+
+### 2. **Connect to the Database & Authenticate User**
+
+The main purpose of this middleware is to connect to the database and check if the user is authenticated. You can use any database connection method you prefer, such as Mongoose for MongoDB.
+
+```
+import AdminModel from "@/src/database/models/Admin";
+import { connectMongoDB } from "@/src/database/connection";
+
+const authMiddleware = (handler) => async (req, res) => {
+  await connectMongoDB();
+  const authToken = req.headers.authorization;
+
+  try {
+    if (req.method == "GET") {
+      const admin = await AdminModel.findById(cookieObject._id);
+      // You can use your own logic to check if the user is authenticated
+      if (admin.userId !== authToken) {
+        return res.status(401).json({ message: "Unauthorized" });
+      } else {
+        // return the handler function after authentication
+        return handler(req, res);
+      }
+    }
+  } catch (err) {
+    res.status(500).json({ err, message: "Unable to Connect" });
+  }
+};
+
+export default authMiddleware;
+```
+> You can use any logic to check if the user is authenticated and remeber to return the `handler` function after authentication.
+<br/>
+
+### 3. **Apply Middleware to Specific Routes**
+To apply the middleware to specific routes, you just need to import the `authMiddleware` function and wrap your API route handler with it.
+
+Like I said earlier, we will be using middleware for the admin routes. So, the file will be in the same `admin` folder, as `<root>/pages/api/admin/index.js`
+```
+import mongoose from "mongoose";
+import { connectMongoDB } from "@/src/database/connection";
+import authMiddleware from "../middleware";
+
+async function handler(req, res) {
+  try {
+    await connectMongoDB();
+    // fetch data from the database
+    res.status(200).json({ data });
+  } catch (err) {
+    res.status(500).json({ message: "Unable to Connect" });
+  }
+}
+
+// This ensures that the middleware is applied to this route
+export default authMiddleware(handler);
+```
+<br/>
+
+### 4. **Send Authorization token from your client side code**
+In this example, I have stored the `userId` token in a `cookie`, so to send the authorization token from your client-side code, you have to use the `getServerSideProps` function to fetch the cookie data from the server `request`. 
+
+```
+export const getServerSideProps = async (context) => {
+  const { req } = context;
+  const cookie = req.cookies;
+
+  const response = await fetch(
+    "http://localhost:3000/api/admin",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cookie.admin}`,
+      },
+    }
+  );
+  const data = await response.json();
+
+  return { props: { data } };
+  // return { props: { cookie } };
+};
+```
+> You can also pass the `cookie` data to the component to be used in user defined fetch or delete functions
+<br/>
+
+## 🚀 Conclusion
+
+While Next.js middleware can't directly handle database connections in the Edge Runtime, you can still achieve dynamic, data-driven logic by offloading database operations to API routes. This pattern keeps your application performant, secure, and within platform limitations — or gives you full flexibility if you're using Node.js middleware. Use this approach to validate sessions, manage access control, or run any server-side logic before a request hits your route.
+<br/>
+---
+
+#### **Happy Coding 🚀**
+<br/>

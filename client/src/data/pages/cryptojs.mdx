@@ -1,0 +1,47 @@
+---
+title: Encryption & Decryption using CryptoJS
+description: Understand encryption and decryption using CryptoJS
+image: 
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316760/WebBlog/image_vjfprx.png
+  alt: CryptoJS
+tags: [CryptoJS, Encryption, Decryption]
+date: 2024-11-30
+---
+
+# Encryption and Decryption using CryptoJS
+
+[**CryptoJS**](https://www.npmjs.com/package/crypto-js) is a JavaScript library designed for data encryption and decryption using various cryptographic algorithms such as AES, DES, and RC4. It allows developers to securely encrypt sensitive information into an unreadable format (ciphertext) and decrypt it back to its original form (plaintext) using a shared secret key. CryptoJS is lightweight, versatile, and commonly used for securing data in web applications, including protecting sensitive storage and ensuring secure data transmission.
+
+#### Steps to follow
+
+1. Install the `crypto-js` package from [npm](https://www.npmjs.com/package/crypto-js)
+```
+npm install crypto-js
+```
+
+<br/>
+2. Import Package and **Encrypt** the data using a shared secret key
+```
+import CryptoJS from "crypto-js";
+const data = "Some Secret Message"; // JSON.stringify(data) if object
+
+const encryptedData = CryptoJS.AES.encrypt(
+  data,
+  "linkmansecret"
+).toString();
+```
+- To remove unwanted front slash `/` from the encrypted code, use the built-in JS `encodeURIComponent()` function
+```
+const encryptedData = encodeURIComponent(
+  CryptoJS.AES.encrypt(data, "linkmansecret").toString()
+);
+```
+
+<br/>
+3. **Decrypt** the code
+```
+const code = CryptoJS.AES.decrypt(
+  decodeURIComponent(cryptcode),
+  process.env.CRYPTO_SECRET
+).toString(CryptoJS.enc.Utf8);
+```

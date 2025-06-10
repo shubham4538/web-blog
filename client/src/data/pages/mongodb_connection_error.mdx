@@ -1,0 +1,70 @@
+---
+title: MongoDB Connection Error
+description: 'Error: querySrv ETIMEOUT when Connecting to MongoDB'
+image: 
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316792/WebBlog/1727936479365_gj7rjm.png
+  alt: hello
+tags: [MongoDB, Connection, NodeJs]
+date: 2025-1-22
+---
+
+# ETIMEOUT Error in MongoDB
+
+Whenever encountering a connection error regarding the dns settings of the app, 
+
+```
+Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.4ltfv.mongodb.net
+    at QueryRespirap.onresolve (as oncomplete) (drs.js:203/19) {
+  errno: "ETIMEOUT",
+  code: "ETIMEOUT",
+  syscall: "queryServ",
+  hostname: "mongodb._tcp.clustere.4ltfv.mongodb.net"
+}
+```
+
+## Steps to encounter the Error
+
+### 1. Login to MongoDB Atlas.
+Login to [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database) with your credentials
+<br />
+### 2. Go to Dashboard / Overview & Select the Cluster you want to connect to.
+<div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+  <img 
+    src="/images/step2.png" 
+    alt="Alt text" 
+    className="object-cover w-full" 
+  />
+</div>
+<br />
+### 3. From the 'Connect to your application' -> select the Drivers button
+<div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+  <img 
+    src="/images/drive.png" 
+    alt="Alt text" 
+    className="object-cover w-full" 
+  />
+</div>
+<br />
+### 4. Now select the Driver you want and Version
+Select a verion that falls under `NON STABLE API` which removes the SRV protocol
+<div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+  <img 
+    src="/images/version.png" 
+    alt="Alt text" 
+    className="object-cover w-full" 
+  />
+</div>
+<br />
+### 5. Copy the connection string and hit "Done"
+The connection string must look something like this
+<div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+  <img 
+    src="/images/string.png" 
+    alt="Alt text" 
+    className="object-cover w-full" 
+  />
+</div>
+After copying the connection string, replace the `<password>` with your MongoDB Atlas password and `<dbname>` with the database from the cluster you want to use. The `<username>` field will be replaced with the MongoDB username.
+<br />
+
+### Replace the URL & restart the application to get a smooth connection 🎉

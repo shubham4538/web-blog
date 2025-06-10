@@ -1,0 +1,85 @@
+---
+title: Working with Cookies in Next.js
+description: Using cookies in Next.js for session management, including setting, gethering data and deleting cookies.
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1747149694/WebBlog/cooiies_romp3o.jpg
+  alt: nextjs cookies headers
+tags: [NextJs, Cookies, Headers]
+date: 2025-05-17
+---
+
+# 🍪 Working with Cookies in Next.js
+
+Cookies are a standard way to store data on the client to maintain sessions, track authentication, or persist user preferences across requests. In Next.js, you can work with cookies directly in API routes, server-side functions, and middleware by accessing and modifying HTTP request and response headers. This allows you to implement secure login sessions, user-specific data handling, and protected routes without relying on third-party libraries.
+
+## 🧰 Use Case
+Here are some common uses of cookies in a Next.js application:
+
+ - **Authentication**: Store session tokens or user IDs to identify logged-in users.
+ - **Authorization**: Track user roles or permissions for protected routes.
+ - **Session Management**: Maintain user state across pages and requests.
+ - **Color Modes**: Remember a user’s preference for theme mode across sessions
+<br/>
+
+## ⚙️ Steps for setting Cookies with NextJs for Authentication
+
+We'll be implementing a simple authentication system using cookies in Next.js. This example will cover the following steps:
+
+### 1. **User Login**
+We will set Cookies immediately after the user Logs-In with their credentials. Cookies must store some Unique ID or any token, here we will store `userId`
+
+Modify your `<root>/pages/api/auth/login.js` or your login file accordingly
+```
+const { username, password } = req.body;
+const admin = await Admin.findOne({ username, password });
+if (!admin) {
+  return res.status(401).json({ message: "Invalid credentials" });
+} else {
+  const userId = admin._id
+  res.setHeader(
+    "Set-Cookie",
+    `admin=${userId}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`
+  );
+  return res.status(200).json({ admin, login: true });
+}
+```
+<br/>
+
+### 2. **Authorize user using middleware**
+
+Middleware can check if a user is authenticated by looking for a session token or user ID in cookies. If no valid session is found, it denies access to protected routes, ensuring only authorized users can proceed.
+
+It will be located at the root project structure `<root>/middleware.js`
+```js
+import { NextResponse, NextRequest } from "next/server";
+
+export default async function middleware(request: NextRequest) {
+  const cookies = request.cookies.get("admin")?.value;
+  if (cookies) {
+    return NextResponse.next();
+  } else {
+    if (request.nextUrl.pathname.startsWith("/admin/movies")) {
+      // For client-side navigation
+      return NextResponse.redirect(new URL("/auth/login", request.url));
+    } else {
+      // For server-side navigation
+      return NextResponse.json(
+        { message: "User not authenticated" },
+        { status: 401 }
+      );
+    }
+  }
+}
+```
+
+> You can check for ID matching the database or apply conditions according to your application needs.
+<br/>
+
+## 🚀 Conclusion
+
+Cookies in Next.js provide a simple and secure way to manage user sessions, preferences, and other stateful data. By using cookies, you can improve user experience while ensuring the security of sensitive data. Implementing secure cookie practices like `httpOnly`, `SameSite`, and proper session management can help protect against common web vulnerabilities.
+<br/>
+---
+
+#### **🍪 Save your Cookies wisely! 🚀**
+<br/>

@@ -1,0 +1,102 @@
+---
+title: How to Open Vite Dev Server on Your Mobile
+description: Access your Vite dev server from a mobile device on the same network
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1745562704/WebBlog/Untitled-2_edtg2c.png
+  alt: vite mobile server
+tags: [Vite, Mobile, Server]
+date: 2025-04-25
+---
+
+# 📱 How to Open Vite Dev Server on Your Mobile
+
+Developing locally with Vite is fast and smooth—but what if you want to see how your site looks on an actual mobile device? Good news: it's easy! In this post, you'll learn how to open your Vite dev server on your phone with just a few simple steps.
+
+## 🛠 Step-by-Step Instructions
+
+### 1. **Get your Computer/PC and Mobile on the same Network**
+
+Get your computer and phone on the same Wi-Fi network, that means both devices should be connected to the same Wi-Fi Network. You can also turn on your Mobile hotspot and connect your Computer if Wi-fi is not available. One connected, you're good to go!
+<br/>
+
+### 2. **Find your local IP address**
+
+To let your phone access your Vite dev server, you’ll need your computer’s local IP address — this is the address your device uses on your Wi-Fi network. Here’s how to find it:
+
+   - Run this in your terminal:
+   - Look for an `IPv4` address looking something like this `192.168.x.x`.
+
+```
+# macOS / Linux
+ifconfig | grep inet
+
+# Windows
+ipconfig
+```
+<br/>
+
+### 3. **Run Vite with host flag**
+
+Vite doesn’t share your dev server with the rest of your network, it only runs on `localhost` by default. That’s perfect if you are working on a project alone, but if you want to test on your phone or another device, you’ll need to run it with `--host` flag and use your computer’s IP address so other devices can find it.
+
+- To run the server on mobile, you hace to start the vite server with the following command
+
+```
+npm run dev -- --host
+```
+
+**Note:** This is great for a quick temporary run, if you want to make it stick, you'll need to update the `"dev"` key from `"vite"` to `"vite --host"` in your `package.json` file for a more permanent setup.
+
+```json
+"scripts": {
+  "dev": "vite --host",
+  "build": "vite build",
+  "preview": "vite preview"
+},
+```
+<br/>
+
+### 4. **Access the app on your phone**
+
+Once the complete setup is done, on your mobile browser, go to: 
+```
+http://192.168.x.x:5173
+```
+
+> Replace `192.168.x.x` with your computer's local IP.
+
+> Replace the port number `5173` if you have explicitly defined the port number in your `vite.config.js` file.
+<br/>
+
+### 🪄Tip:
+
+Running the server with the `--host` flag, Vite always shows the Local and Network url which the server runs on.
+
+<div className="p-2 md:p-4 border border-gray-300 rounded-xl overflow-hidden md:w-[70%] md:m-auto">
+  <img 
+    src="https://res.cloudinary.com/shubham4538/image/upload/v1745560180/WebBlog/httpsdev-to-uploads.s3.amazonaws_sr0136.jpg" 
+    alt="Alt text" 
+    className="object-cover w-full rounded-md" 
+  />
+</div>
+You should now see the same Vite dev server running on your mobile device. You can interact with it just like you would on your computer.
+<br/>
+
+### 🔒 Troubleshooting
+
+- Make sure both devices are on the **same Wi-Fi network**
+- Disable firewall or allow traffic on port `5173`
+- Try a different browser on your phone if it doesn’t load
+<br/>
+
+### Conclusion
+
+Exploring your app on different devices is a great way to see how it performs in the real world. By accessing the Vite dev server from your phone or tablet, you get a firsthand look at how your app behaves on different screen sizes and networks. It’s a simple trick that can help you spot issues early and make sure everything looks and feels just right. With a little setup, you'll be testing on all your devices in no time!
+
+<br/>
+---
+<br/>
+
+#### **Happy mobile debugging! 🚀**
+<br/>
+

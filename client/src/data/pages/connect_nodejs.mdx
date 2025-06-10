@@ -1,0 +1,51 @@
+---
+title: NodeJs Connection
+description: Connect NodeJS with different connections
+image: 
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316727/WebBlog/Nodejs_aj103m.jpg
+  alt: NodeJs Connection
+tags: [Server, NodeJs]
+date: 2024-6-14
+---
+
+# Connect to NodeJs
+
+2 Basic methods to connect to NodeJs
+
+## #Method 1
+
+Connect through HTTP
+
+```
+const http = require('http');
+const port = process.env.PORT || 3001;
+
+cosnt app = http.createServer((req, res) => {
+  // conditional logic according to Method and Url
+  res.write("Hello World!");
+  console.log(req);
+  res.end();
+});
+
+app.listen(port, ()=> {
+  console.log(`Running on ${port}`);
+})
+```
+
+## #Method 2
+
+Connect through Express framework
+
+```
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3001;
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(port, ()=> {
+  console.log(`Running on ${port}`);
+})
+```

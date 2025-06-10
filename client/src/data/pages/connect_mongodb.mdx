@@ -1,0 +1,68 @@
+---
+title: MongoDB Connection
+description: Connect MongoDB with different connections
+image: 
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316608/WebBlog/mongodb_dvhsv9.png
+  alt: hello
+tags: [MongoDB, Database, NodeJs]
+date: 2024-6-14
+---
+
+# Connect to MongoDB
+
+Several methods to connect to MongoDB
+
+## #Method 1
+
+Connect from Mongoose Url
+
+```
+MONGO_URL=mongodb+srv://<user>:<pass>@cluster0.4ltfv.mongodb.net/<dbname>
+```
+```
+const mongoose = require("mongoose");
+const mongoUrl = process.env.MONGO_URL;
+
+mongoose.connect(mongoUrl)
+```
+
+## #Method 2
+
+#### 1. Connect from MongoClient
+
+```
+const MongoClient = require("mongodb").MongoClient;
+const url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, (err, db) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(
+      db
+        .db()
+        .admin()
+        .listDatabases()
+        .then(dbs => {
+          console.log(dbs);
+        })
+    )
+  }
+})
+```
+
+#### 2. Connect from MongoClient
+
+```
+const MongoClient = require("mongodb").MongoClient;
+const url = "mongodb://localhost:27017/";
+const client = new MongoClient(url, {useUnifiedTopology: true});
+
+client
+  .connect()
+  .then(client => client.db().admin().listDatabases())
+  .then(dbs => {
+    console.log(dbs);
+  })
+  .finally(() => client.close());
+```

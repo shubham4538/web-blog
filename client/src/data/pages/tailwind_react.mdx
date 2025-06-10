@@ -1,0 +1,62 @@
+---
+title: Tailwind React Setup
+description: Installing Tailwind for React Apps
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742318081/WebBlog/maxresdefault_qh30xg.jpg
+  alt: Tailwind React
+tags: [Tailwind, React]
+date: 2025-3-18
+---
+
+# Tailwind React Setup
+
+## Steps to Install Tailwind for React Applications
+1. Install Dependencies.
+2. Initialize Tailwind.
+3. Update Configuration file.
+4. Add base CSS Classes.
+5. Start server
+
+<br/>
+
+### 1. Install Dependencies 
+> The very first step is for using tailwind classes is installing the required dependencies. You need to install \`tailwindcss\`, \`postcss\` & \`autoprefixer\`
+\`\`\`
+npm install -D tailwindcss postcss autoprefixer
+\`\`\`
+<br/>
+
+### 2. Initialize Tailwind 
+> After installing the dependencies, you need to initialize tailwind for further configuration
+\`\`\`
+npx tailwindcss init -p
+\`\`\`
+<br/>
+
+### 3. Update Configuration file 
+> When the initialization is completed, a config file as \`tailwind.config.js\` must be created. You need to add file paths and extensions that will be using the Tailwind classes accordingly
+>
+See more [here](https://v3.tailwindcss.com/docs/content-configuration)
+\`\`\`
+content: ["./src/**/*.{js,jsx,ts,tsx}"]
+\`\`\`
+<br/>
+
+### 4. Add base CSS Classes
+> Finally, add the following CSS classes in the \`index.css\` file
+\`\`\`
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+\`\`\`
+<br/>
+
+### 5. Start server 
+> Once all the initialization and configuration is completed, restart the dev server
+\`\`\`
+npm run dev
+\`\`\`
+<br/>
+#### After restarting the server, you are now ready to use the CSS [Classes](https://tailwindcss.com/docs/styling-with-utility-classes) and explore the possible outcomes 🎉🎉
+<br/>
+<br/>

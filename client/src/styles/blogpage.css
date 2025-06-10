@@ -1,0 +1,58 @@
+.blog a {
+  color: #3d3dff;
+  text-decoration: underline;
+}
+.blog code {
+  font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono",
+    Menlo, Monaco, Consolas, monospace;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1px;
+}
+.blog p code,
+.blog li code {
+  padding: 2px 4px;
+  font-weight: 400;
+  border-radius: 3px;
+  color: #1d1d1d;
+  background-color: #d6d6d6;
+}
+
+.blog pre {
+  overflow-x: auto;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  background-color: #222931;
+}
+
+.blog blockquote {
+  margin: 30px 0px;
+  padding-left: 20px;
+  border-left: 3px solid #d2d2d2;
+  font-style: italic;
+  /* background-color: #f1f1f1; */
+}
+
+.blog blockquote p {
+  display: inline-block;
+  margin: 5px 0;
+}
+
+pre::-webkit-scrollbar {
+  height: 5px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: transparent; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+}
+
+pre:hover::-webkit-scrollbar-thumb {
+  background: gray; /* Color when hovering over the scrollbar thumb */
+}

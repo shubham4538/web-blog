@@ -1,0 +1,114 @@
+[
+  {
+    "title": "MongoDB Connection Error",
+    "description": "Error: querySrv ETIMEOUT when Connecting to MongoDB",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://media.licdn.com/dms/image/v2/D5612AQEormdHLhYOnw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1727936479365?e=1743033600&v=beta&t=aFscTjfsIN9asgmW6UEq6dN8OQ7ebrEtrzS4UBudqaw",
+      "alt": "MongoDB"
+    },
+    "slug": "mongodb_connection_error",
+    "tags": ["MongoDB", "Connection", "NodeJs"],
+    "date": "22nd January 2025"
+  },
+  {
+    "title": "Encryption & Decryption using CryptoJS",
+    "description": "Understand encryption and decryption using CryptoJS.",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://venafi.com/_next/image/?url=https%3A%2F%2Fcdn.venafi.com%2F994513b8-133f-0003-9fb3-9cbe4b61ffeb%2F757f6176-9bb8-438b-8491-29f9e9c31abd%2Faid_field_img__89a675854846d81257e19c81937cd7a6.jpg%3Fw%3D864%26h%3D370%26fm%3Dwebp%26q%3D75%26fit%3Dcrop&w=1080&q=75&dpl=dpl_3EAuLccmwaq4KZ9GcZftJq5NbwLA",
+      "alt": "CryptoJS"
+    },
+    "slug": "cryptojs",
+    "tags": ["CryptoJS", "Encryption", "Decryption"],
+    "date": "30th November 2024"
+  },
+  {
+    "title": "NextJS CORS Error",
+    "description": "This is NextBLog",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*xtUmPY4kkCQu3ZiWcg_gYw.png",
+      "alt": "NextJS CORS"
+    },
+    "slug": "nextjs_cors_error",
+    "tags": ["NextJS", "CORS", "Request"],
+    "date": "11th November 2024"
+  },
+  {
+    "title": "MongoDB Connection",
+    "description": "Connect MongoDB with different connections",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://miro.medium.com/v2/resize:fit:1200/0*BmLKgrU_qFtakYsB.png",
+      "alt": "hello"
+    },
+    "slug": "connect_mongodb",
+    "tags": ["MongoDB", "Database", "NodeJs"],
+    "date": "14th June 2024"
+  },
+  {
+    "title": "NodeJs Connection",
+    "description": "Connect NodeJS with different connections",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://www.split.io/wp-content/uploads/Blog-2160x1080-Building-a-CRUD-API-with-Node-js-and-Express-1920x960.png",
+      "alt": "NodeJs Connection"
+    },
+    "slug": "connect_nodejs",
+    "tags": ["Server", "NodeJs"],
+    "date": "14th June 2024"
+  },
+  {
+    "title": "Infinite Loops in React",
+    "description": "Handle different infinite loops react",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://i.ytimg.com/vi/Flpx5V3iXXw/hqdefault.jpg",
+      "alt": "Infinite Loops in React"
+    },
+    "slug": "react_infinite_loop",
+    "tags": ["React", "Loop"],
+    "date": "14th June 2024"
+  },
+  {
+    "title": "Sample",
+    "description": "This is Sample",
+    "author": {
+      "name": "Shubham Singhvi",
+      "designation": "Full Stack Developer",
+      "image": "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
+    },
+    "image": {
+      "src": "https://i.graphicmama.com/blog/wp-content/uploads/2020/08/25072942/Flat-character-illustration-example-for-online-dating.jpg",
+      "alt": "Sample"
+    },
+    "slug": "sample",
+    "tags": ["Sample"],
+    "date": "14th June 2024"
+  }
+]

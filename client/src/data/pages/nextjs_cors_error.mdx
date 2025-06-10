@@ -1,0 +1,71 @@
+---
+title: NextJS CORS Error
+description: This is NextBLog
+image: 
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316820/WebBlog/1xtUmPY4kkCQu3ZiWcg_gYw_nto5iz.jpg
+  alt: NextJS CORS
+tags: [NextJS, CORS, Request]
+date: 2024-11-11
+---
+
+# CORS Error when Making a Request to Next.js Endpoint
+
+### ⚠️ There things to note about solving this issue in nextJS 13.
+1. Export the `OPTIONS` function in your `route.ts` handler file.
+2. Make sure to remove the trialing `/` when making the fetch request in your code.
+3. Modify your `next.config.js` file to update the headers on all responses.
+
+### Solution
+
+1. In order to fix it in **NextJs 13**, you have to export the `OPTIONS` async function in your routes handler as below in `app/api/route.ts` file. (You can adjust it to allow requests from only specific origins but here I am allowing all origins.)
+```
+// app/api/route.ts
+
+export async function OPTIONS(request: Request) {
+  const allowedOrigin = request.headers.get("origin");
+  const response = new NextResponse(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": allowedOrigin || "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
+      "Access-Control-Max-Age": "86400",
+    },
+  });
+
+  return response;
+}
+```
+
+- Make sure to include just the HTTP methods that you will be supporting. The OPTIONS method must be included in the allowed HTTP methods since the browser will use it to determine whether to implement CORS protection or not.
+<br/>
+2. Make sure you don't put a trailing slash when making the fetch request to your routes in your code. For example [https://my-next-js-app.com/api/](https://my-next-js-app.com/api/) is not the same as as [https://my-next-js-app.com/api](https://my-next-js-app.com/api). If you include the trailing /, the server might send back a `308 redirect`, but for some reason the browser will also trigger a CORS error! Again, remove the trailing `/` when making the fetch request in your code.
+<br/>
+3. Modify `next.config.js` as below
+```
+// next.config.js
+module.exports = {
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
+      },
+    ];
+  },
+};
+```

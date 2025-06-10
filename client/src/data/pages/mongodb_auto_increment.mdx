@@ -1,0 +1,130 @@
+---
+title: How to Add Auto Increment value in MongoDB
+description: Implementing auto-incrementing fields in MongoDB collections, similar to SQL's AUTO\_INCREMENT.
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316792/WebBlog/1727936479365_gj7rjm.png
+  alt: mongodb auto-increment mongoose
+tags: [MongoDB, Auto-Increment, Mongoose]
+date: 2025-05-07
+---
+
+# How to Add Auto Increment Value in MongoDB
+
+MongoDB doesn’t support auto-increment fields out of the box like SQL databases do. However, you can implement this feature manually using a separate counter collection. In this post, you’ll learn how to set up an auto-incrementing field in MongoDB using `mongoose` — ideal for creating custom IDs, ticket numbers, or order numbers.
+
+## 🧰 Use Case
+
+Auto-incrementing fields are useful when you want to maintain a predictable, sequential identifier. For example:
+
+* Invoice numbers
+* Customer IDs
+* Order numbers
+
+## ⚙️ Setup with Node.js (or Mongo Shell)
+
+We'll use a separate `Counters` model to store the current sequence number.
+
+### 1. **Create a Counters Model**
+
+Insert an initial document: `/models/Counter.js`
+
+```js
+const mongoose = require("mongoose");
+
+const CounterSchema = new mongoose.Schema({
+  _id: String,
+  sequence_value: { type: Number, default: 0 },
+});
+
+const Counter =
+  mongoose.models.Counter || mongoose.model("Counter", CounterSchema);
+module.exports = Counter;
+```
+<br/>
+
+### 2. **Create a Sequence Value Function**
+
+Create a funtion in the main entity model (e.g., `Product.js`) to get the next sequence value. This function will be called whenever you need a new ID.
+
+```js
+const mongoose = require("mongoose");
+const Counter = require("./Counter.js");
+
+const ProductSchema = mongoose.Schema(
+  {
+    product_id: Number, // This field will be auto-incremented
+    // other fields
+  }
+);
+
+ProductSchema.pre("save", async function (next) {
+  if (this.isNew) {
+    const doc = await Counter.findByIdAndUpdate(
+      { _id: "product_id" },
+      { $inc: { sequence_value: 1 } },
+      { new: true, upsert: true }
+    );
+    this.product_id = doc.sequence_value;
+  }
+  next();
+});
+
+const ProductModel =
+  mongoose.models.Products || mongoose.model("Products", ProductSchema);
+export default ProductModel;
+```
+<br/>
+
+### 3. **Use the Increment Value When Inserting a Document**
+
+Your api endpoint to create a new product will look like this:
+
+```js
+import { connectMongoDB } from "@/src/database/connection";
+import ProductModel from "@/src/database/models/Product";
+
+async function handler(req, res) {
+  await connectMongoDB();
+
+  try {
+    let item = ProductModel({});
+    const newItem = await item.save();
+    res.status(200).send({ newItem });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export default handler;
+```
+
+> This will automatically assign the next sequence value to `product_id` when a new document is created.
+<br/>
+
+## 🛡️ Notes & Considerations
+
+* This method is **not atomic across distributed clusters**, but works well for single-node or replica set setups.
+* For production environments, ensure proper **error handling** and **race condition checks** if needed.
+* If using **Mongoose**, you can wrap this logic inside a pre-save hook.
+<br/>
+
+### ✅ Sample Output
+
+```js
+{
+  product_id: 1,
+  name: "Wireless Mouse",
+  price: 25.00
+}
+```
+<br/>
+
+## 🚀 Conclusion
+
+While MongoDB doesn’t support `AUTO_INCREMENT` natively, it’s easy to build your own version using a `counters` collection. This pattern is widely used and gives you fine-grained control over custom IDs and sequencing.
+
+<br/>
+---
+
+#### **Happy coding with MongoDB! 🚀**
+<br/>

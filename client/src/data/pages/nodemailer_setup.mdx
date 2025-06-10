@@ -1,0 +1,135 @@
+---
+title: Nodemailer Setup with Gmail
+description: A step-by-step guide to configure Nodemailer with Gmail using App Passwords
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1745338518/WebBlog/How-to-Set-up-Nodemailer-with-Gm_e4ijcz.png
+  alt: NodeJs nodemailer gmail
+tags: [NodeJs, nodemailer, gmail]
+date: 2025-4-22
+---
+
+# 📧 Nodemailer Setup with Gmail: Step-by-Step Guide
+
+If you're looking to send emails from your Node.js application, **Nodemailer** is one of the most reliable and beginner-friendly packages available. In this guide, we'll walk through how to set up Nodemailer using **Gmail SMTP** with **App Passwords**, configure your project, and implement the code.
+
+## 🔐 Step 1: Enable App Passwords in Gmail
+
+Due to Google’s security policies, you can’t use your regular Gmail password with third-party apps like Nodemailer. Instead, you need an **App Password**.
+
+### How to Generate an App Password
+
+1. **Enable 2-Step Verification** 
+
+   - Go to [Google Account Security](https://myaccount.google.com/security) and enable **2-Step Verification** if not yet enabled.
+
+<br/>
+<div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+  <img 
+    src="https://res.cloudinary.com/shubham4538/image/upload/v1745340317/WebBlog/lo0pnamnzlf5qwnjkfyj.png" 
+    alt="Alt text" 
+    className="object-cover w-full" 
+  />
+</div>
+<br/>
+
+2. **Create App Password**
+
+    After enabling 2FA:
+    - Go to [App passwords](https://myaccount.google.com/apppasswords) and verify account
+
+    - Choose **Mail** as the app, and **Other (Custom name)** for the device
+
+    - Name it like `Nodemailer` and click **Create**
+
+    <div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+      <img 
+        src="https://res.cloudinary.com/shubham4538/image/upload/v1745340309/WebBlog/fvegreowcbzanxdkvzlp.png" 
+        alt="Alt text" 
+        className="object-cover w-full" 
+      />
+    </div>
+    <br/>
+    
+    - Copy the **16-character password** shown
+
+    <br/>
+    <div className="border border-gray-300 rounded-xl overflow-hidden md:w-[90%] md:m-auto">
+      <img 
+        src="https://res.cloudinary.com/shubham4538/image/upload/v1745340468/WebBlog/n3b5wufaqvdvbn5qkqev.png" 
+        alt="Alt text" 
+        className="object-cover w-full" 
+      />
+    </div>
+    <br/>
+
+## 🏗️ Step 2: Initialize Your Node.js Project
+
+If you haven't already set up a Node.js project:<br/>
+Setup now with the following commands
+
+```
+mkdir nodemailer-gmail
+cd nodemailer-gmail
+npm init -y
+```
+<br/>
+- Now intall the `nodemailer` package. Get more details about Nodemailer [here](https://nodemailer.com/)
+```
+npm install nodemailer
+```
+
+<br/>
+## 🛡️ Step 3: Secure Your Credentials with ENV
+
+You should never hardcode sensitive data like your Gmail credentials in your codebase. Instead, use environment variables.
+
+1. **Install `dotenv`**  
+   This package loads variables from a `.env` file into `process.env`.
+
+```
+npm install dotenv
+```
+
+2. Create a `.env` file at the root of your project and add:
+```
+GMAIL_USER=youremail@gmail.com
+GMAIL_PASS=your appp assw ordx
+```
+
+<br/>
+## ⚙️ Step 4: Configure Nodemailer with Gmail
+
+Create a file named `index.js` and paste the following code in the file
+
+```js
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  secure: false,
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS
+  }
+});
+
+const mailOptions = {
+  from: process.env.GMAIL_USER,
+  to: 'recipient@example.com',
+  subject: 'Test Email from Nodemailer',
+  text: 'This is a test email sent using Gmail and Nodemailer!'
+};
+
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) return console.error('Error:', error);
+  console.log('Email sent:', info.response);
+});
+```
+
+Save the file and run this command to execute the Nodemailer function
+```
+node index.js
+```
+<br/>
+**Note**❗: You can configure different types of callbacks in the code. Instead of just getting notified when a message fails to delivers, you could, for example, receive an array including the recipient’s address along with the server response. See all the available options [here](https://nodemailer.com/usage/)

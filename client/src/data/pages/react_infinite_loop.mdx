@@ -1,0 +1,81 @@
+---
+title: Infinite Loops in React
+description: Handle different infinite loops react
+image:
+  src: https://res.cloudinary.com/shubham4538/image/upload/v1742316877/WebBlog/hqdefault_m4i4qr.jpg
+  alt: Infinite Loops in React
+tags: [React, Loop]
+date: 2024-6-14
+---
+
+# Infinite Loops in React
+
+Several solutions to avoid to infinite loops in React
+
+## #Problem 1
+
+#### Changing state value direclty
+
+```
+function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(count + 1) // causes infinite loop
+  }, [count])
+
+  return ...
+}
+```
+
+If you keep updating a state inside `useEffect` with a property you update set as a dependency, it will cause an infinite loop.
+
+`count` updates → `useEffect` detects updated dependency → `count` updates → `useEffect` detects updated dependency → …
+
+### Fix 🎉
+
+If you want to update a state based on its previous value, use a [functional update](https://legacy.reactjs.org/docs/hooks-reference.html#functional-updates). This way, you can remove state property from the dependency list and prevent an infinite loop.
+
+```
+function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(previousCount => previousCount + 1)
+  }, [])
+
+  return ...
+}
+```
+
+## #Problem 2
+
+#### Incorrectly set event handlers
+
+```
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={setCount(1)}>Submit</button> // infinite loop
+  );
+}
+```
+
+It is not the right way to set event handlers. You need to provide a **function** to the `onClick`, **not the result of the function execution**. By executing a function before setting a handler, you update a state inside the render, which causes an infinite loop.
+
+State updates → triggers re-render → state updates → triggers re-render → …
+
+### Fix 🎉
+
+Set a **function** to `onClick` event. It is a proper way to set event handlers. This way state will only update after a click of a button and won’t cause an infinite loop.
+
+```
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(1)}>Submit</button> // infinite loop
+  );
+}
+```
