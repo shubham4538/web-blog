@@ -7,6 +7,7 @@ import { remark } from "remark";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import bcrypt from "bcryptjs";
+import { ErrorBoundary } from "react-error-boundary";
 
 import GenerateDate from "../lib/GenerateDate.js";
 
@@ -16,15 +17,11 @@ function SampleTextFile() {
   const { blog } = useParams();
   const [searchParams] = useSearchParams();
   const [slug, setSlug] = useState(blog || "");
+  const [error, setError] = useState(null);
   const [blogId, setBlogId] = useState("new");
   const [matter, setMatter] = useState();
   const [source, setSource] = useState();
   const [rawMdx, setRawMdx] = useState("");
-
-  useEffect(() => {
-    // const hashedPassword = bcrypt.hashSync("", 10);
-    // console.log("Hashed Password:", hashedPassword);
-  }, []);
 
   // Fetch blog
   useEffect(() => {
@@ -56,17 +53,32 @@ function SampleTextFile() {
   // Parse MDX and frontmatter
   useEffect(() => {
     (async () => {
-      const frontData = remark()
-        .use(remarkFrontmatter, ["yaml", "toml"])
-        .use(remarkParseFrontmatter)
-        .processSync(rawMdx);
-      setMatter(frontData.data);
+      try {
+        const frontData = remark()
+          .use(remarkFrontmatter, ["yaml", "toml"])
+          .use(remarkParseFrontmatter)
+          .processSync(rawMdx);
+        setMatter(frontData.data);
 
-      const filterHtml = rawMdx.replace(/^---[\s\S]*?^---\s*/m, "");
-      const mdxSource = await serialize(filterHtml);
-      setSource(mdxSource);
+        const filterHtml = rawMdx.replace(/^---[\s\S]*?^---\s*/m, "");
+        const mdxSource = await serialize(filterHtml);
+        setSource(mdxSource);
+        setError(null);
+      } catch (err) {
+        setSource(null);
+        setError("Error parsing MDX content");
+      }
     })();
   }, [rawMdx]);
+
+  function ErrorFallback({ error }) {
+    return (
+      <div className="text-red-500 bg-red-50 border p-4 rounded">
+        <p className="font-bold">Error rendering MDX:</p>
+        <pre className="text-xs whitespace-pre-wrap">{error.message}</pre>
+      </div>
+    );
+  }
 
   const submitBlog = async () => {
     try {
@@ -178,7 +190,13 @@ function SampleTextFile() {
         {/* Rendered MDX (Bottom 75%) */}
         <div className="blog h-3/4 overflow-auto p-6 prose max-w-none">
           {rawMdx ? (
-            <MDXRemote {...source} />
+            error ? (
+              <p className="text-gray-400 italic">{error}</p>
+            ) : (
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <MDXRemote {...source} />
+              </ErrorBoundary>
+            )
           ) : (
             <p className="text-gray-400 italic">No content to render</p>
           )}
