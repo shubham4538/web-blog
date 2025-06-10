@@ -7,7 +7,7 @@ const connectMongoDB = require("./connection");
 const BlogModel = require("./BlogModel.js");
 
 const app = express();
-const port = 3001 || process.env.PORT;
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(cors());

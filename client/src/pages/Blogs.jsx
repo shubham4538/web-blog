@@ -11,7 +11,7 @@ function Blogs() {
   const [matter, setMatter] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/getblogs").then((response) => {
+    axios.get("https://server-webblog.vercel.app/getblogs").then((response) => {
       const contentMatter = response.data.blogs.map((doc) => {
         const frontData = remark()
           .use(remarkFrontmatter, ["yaml", "toml"])

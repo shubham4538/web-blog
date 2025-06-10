@@ -37,7 +37,9 @@ function SampleTextFile() {
       }
 
       try {
-        const response = await axios.get(`http://localhost:3001/${blog}`);
+        const response = await axios.get(
+          `https://server-webblog.vercel.app/${blog}`
+        );
         if (response.data) {
           console.log("Blog data fetched successfully:", response.data);
           setBlogId(response.data.blog._id);
@@ -68,10 +70,13 @@ function SampleTextFile() {
 
   const submitBlog = async () => {
     try {
-      const response = await axios.post(`http://localhost:3001/${blogId}`, {
-        slug,
-        content: rawMdx,
-      });
+      const response = await axios.post(
+        `https://server-webblog.vercel.app/${blogId}`,
+        {
+          slug,
+          content: rawMdx,
+        }
+      );
       console.log("Blog submitted successfully:", response.data);
       if (response.data.blog.slug !== blog) {
         location.href = `/edit/${response.data.blog.slug}`;

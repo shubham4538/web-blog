@@ -20,7 +20,7 @@ function BlogPage() {
   const localState = JSON.parse(localStorage.getItem("short-code"));
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/${slug}`).then((response) => {
+    axios.get(`https://server-webblog.vercel.app/${slug}`).then((response) => {
       setContent(response.data.blog.content);
       setLoading(false);
     });
