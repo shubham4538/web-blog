@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 import HeadDetails from "../components/BlogPage/HeadDetails";
 import Body from "../components/BlogPage/Body";
@@ -55,62 +56,70 @@ function BlogPage() {
     // });
   };
 
-  return (
-    !loading && (
-      <div className="blog myfont max-w-3xl mx-auto mt-10 px-5">
-        {/* Blog details */}
-        <HeadDetails content={content} />
+  return !loading ? (
+    <div className="blog myfont max-w-3xl mx-auto mt-10 px-5">
+      {/* Head */}
+      <Helmet>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8226681368050252"
+          crossorigin="anonymous"
+        ></script>
+      </Helmet>
+      {/* Blog details */}
+      <HeadDetails content={content} />
 
-        {/* Linkman timer or link */}
-        {(state || localState) && (
-          <LinkBlock
-            setContinueButton={setContinueButton}
-            setNextLink={setNextLink}
-          />
-        )}
+      {/* Linkman timer or link */}
+      {(state || localState) && (
+        <LinkBlock
+          setContinueButton={setContinueButton}
+          setNextLink={setNextLink}
+        />
+      )}
 
-        {/* Blog Data */}
-        <Body content={content} />
+      {/* Blog Data */}
+      <Body content={content} />
 
-        {/* Author details */}
-        {/* Might need changes as well */}
-        {/* 
+      {/* Author details */}
+      {/* Might need changes as well */}
+      {/* 
         Commented because of use of single person blogs
         might change when new  authors are added
         Use static untill then
         also removed from mdx frontmatter 
       */}
-        {/* <AuthorDetails slug={slug} /> */}
-        <div className="my-5">
-          <h5 className="m-1">Author:</h5>
-          <div className="flex">
-            <img
-              alt=""
-              src="https://res.cloudinary.com/shubham4538/image/upload/v1739338408/User-profiles/screenshot_1_cysy7w.jpg"
-              className="w-12 h-12 rounded-full object-cover"
-            />
-            <div className="ml-3">
-              <div className="text-lg font-semibold">Anonymous</div>
-              <div className="text-md text-gray-600">Software Developer</div>
-            </div>
+      {/* <AuthorDetails slug={slug} /> */}
+      <div className="my-5">
+        <h5 className="m-1">Author:</h5>
+        <div className="flex">
+          <img
+            alt=""
+            src="https://res.cloudinary.com/shubham4538/image/upload/v1739338408/User-profiles/screenshot_1_cysy7w.jpg"
+            className="w-12 h-12 rounded-full object-cover"
+          />
+          <div className="ml-3">
+            <div className="text-lg font-semibold">Anonymous</div>
+            <div className="text-md text-gray-600">Software Developer</div>
           </div>
         </div>
-
-        {/* Linkman continue button */}
-        <div className="text-center">
-          {(state || localState) && continueButton && (
-            <button
-              onClick={stepTwo}
-              className="w-max p-2 px-3 rounded-md text-center text-white bg-sky-400"
-            >
-              {linkLoading ? "Loading..." : "Continue"}
-            </button>
-          )}
-        </div>
-
-        <Link to={"/blogs"}>{`<- back`}</Link>
       </div>
-    )
+
+      {/* Linkman continue button */}
+      <div className="text-center">
+        {(state || localState) && continueButton && (
+          <button
+            onClick={stepTwo}
+            className="w-max p-2 px-3 rounded-md text-center text-white bg-sky-400"
+          >
+            {linkLoading ? "Loading..." : "Continue"}
+          </button>
+        )}
+      </div>
+
+      <Link to={"/blogs"}>{`<- back`}</Link>
+    </div>
+  ) : (
+    <p className="text-gray-500 text-xl text-center">Loading...</p>
   );
 }
 
