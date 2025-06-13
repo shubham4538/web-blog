@@ -50,9 +50,20 @@ function LinkBlock({ setContinueButton, setNextLink }) {
 
   return (
     <div>
-      <a href="/wed" target="_blank">
+      {/* <a href="/wed" target="_blank">
         <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
-      </a>
+      </a> */}
+      {/* <!-- Timer Ads --> */}
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="ca-pub-8226681368050252"
+        data-ad-slot="7191414055"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
       <div className="text-center">
         {!isTimeUp ? (
           remainingTime ? (
