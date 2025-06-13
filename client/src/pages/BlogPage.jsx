@@ -69,12 +69,24 @@ function BlogPage() {
       {/* Blog details */}
       <HeadDetails content={content} />
 
-      {/* Linkman timer or link */}
-      {(state || localState) && (
+      {/* Linkman timer or Ads */}
+      {state || localState ? (
         <LinkBlock
           setContinueButton={setContinueButton}
           setNextLink={setNextLink}
         />
+      ) : (
+        <>
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-8226681368050252"
+            data-ad-slot="7191414055"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </>
       )}
 
       {/* Blog Data */}

@@ -61,6 +61,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
         data-ad-slot="7191414055"
         data-ad-format="auto"
         data-full-width-responsive="true"
+        onClick={imageCliked}
       ></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
