@@ -60,6 +60,10 @@ function BlogPage() {
     <div className="blog myfont max-w-3xl mx-auto mt-10 px-5">
       {/* Head */}
       <Helmet>
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-8226681368050252"
+        ></meta>
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8226681368050252"
