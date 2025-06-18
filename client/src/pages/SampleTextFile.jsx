@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import axios from "axios";
-import remarkParseFrontmatter from "remark-parse-frontmatter";
-import remarkFrontmatter from "remark-frontmatter";
-import { remark } from "remark";
+import { ErrorBoundary } from "react-error-boundary";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+import matter from "gray-matter";
 import bcrypt from "bcryptjs";
-import { ErrorBoundary } from "react-error-boundary";
+import axios from "axios";
 
 import GenerateDate from "../lib/GenerateDate.js";
-
 import "../styles/blogpage.css";
 
 function SampleTextFile() {
@@ -19,7 +16,7 @@ function SampleTextFile() {
   const [slug, setSlug] = useState(blog || "");
   const [error, setError] = useState(null);
   const [blogId, setBlogId] = useState("new");
-  const [matter, setMatter] = useState();
+  const [frontmatter, setFrontMatter] = useState();
   const [source, setSource] = useState();
   const [rawMdx, setRawMdx] = useState("");
 
@@ -54,14 +51,9 @@ function SampleTextFile() {
   useEffect(() => {
     (async () => {
       try {
-        const frontData = remark()
-          .use(remarkFrontmatter, ["yaml", "toml"])
-          .use(remarkParseFrontmatter)
-          .processSync(rawMdx);
-        setMatter(frontData.data);
-
-        const filterHtml = rawMdx.replace(/^---[\s\S]*?^---\s*/m, "");
-        const mdxSource = await serialize(filterHtml);
+        const { content, data: frontmatter } = matter(rawMdx);
+        setFrontMatter(frontmatter);
+        const mdxSource = await serialize(content);
         setSource(mdxSource);
         setError(null);
       } catch (err) {
@@ -132,21 +124,21 @@ function SampleTextFile() {
       <div className="flex flex-col flex-grow bg-white shadow-inner">
         {/* Frontmatter (Top 25%) */}
         <div className="h-1/4 p-4 border-b bg-gray-50 overflow-auto">
-          {matter?.frontmatter ? (
+          {frontmatter ? (
             <article className="flex flex-col lg:flex-row gap-5">
               <div className="relative aspect-[2/1] lg:w-80 lg:flex-shrink-0 lg:aspect-[3/2]">
                 <img
-                  alt={matter.frontmatter.image?.src || ""}
-                  src={matter.frontmatter.image?.src || ""}
+                  alt={frontmatter.image?.src || ""}
+                  src={frontmatter.image?.src || ""}
                   className="absolute h-full w-full object-cover rounded-xl"
                 />
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-semibold text-gray-600">
-                    {GenerateDate(matter.frontmatter.date || "01-01-1999")}
+                    {GenerateDate(frontmatter.date || "01-01-1999")}
                   </span>
-                  {matter.frontmatter.tags?.map((tag) => {
+                  {frontmatter.tags?.map((tag) => {
                     return (
                       <span
                         className="leading-[1] font-semibold text-sm p-1 px-1.5 rounded-lg bg-gray-200"
@@ -159,11 +151,9 @@ function SampleTextFile() {
                 </div>
                 <div className="pt-4 flex-1">
                   <div className="mb-2 text-xl font-semibold">
-                    {matter.frontmatter?.title}
+                    {frontmatter?.title}
                   </div>
-                  <p className="m-0 text-lg">
-                    {matter.frontmatter?.description}
-                  </p>
+                  <p className="m-0 text-lg">{frontmatter?.description}</p>
                 </div>
                 <div className="pt-4">
                   <div className="flex items-center gap-4">

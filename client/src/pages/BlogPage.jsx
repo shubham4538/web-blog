@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import matter from "gray-matter";
 import CryptoJS from "crypto-js";
 import axios from "axios";
-import { Helmet } from "react-helmet";
 
 import HeadDetails from "../components/BlogPage/HeadDetails";
 import Body from "../components/BlogPage/Body";
@@ -13,6 +14,7 @@ import "../styles/blogpage.css";
 function BlogPage() {
   const [continueButton, setContinueButton] = useState(false);
   const [linkLoading, setLinkLoading] = useState(false);
+  const [frontmatter, setFrontmatter] = useState();
   const [content, setContent] = useState();
   const [loading, setLoading] = useState(true);
   const [nextLink, setNextLink] = useState("");
@@ -22,7 +24,11 @@ function BlogPage() {
 
   useEffect(() => {
     axios.get(`https://server-webblog.vercel.app/${slug}`).then((response) => {
-      setContent(response.data.blog.content);
+      const { content: content, data: frontmatter } = matter(
+        response.data.blog.content
+      );
+      setContent(content);
+      setFrontmatter(frontmatter);
       setLoading(false);
     });
   }, []);
@@ -71,7 +77,7 @@ function BlogPage() {
         ></script>
       </Helmet>
       {/* Blog details */}
-      <HeadDetails content={content} />
+      <HeadDetails frontmatter={frontmatter} />
 
       {/* Linkman timer or Ads */}
       {state || localState ? (

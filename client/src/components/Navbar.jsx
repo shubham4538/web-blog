@@ -20,8 +20,8 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="max-w-7xl m-auto">
-      <header className="myfont flex flex-col lg:flex-row justify-between items-center m-5">
+    <div className="inline-block w-full h-full max-w-7xl m-auto bg-slate-900">
+      <header className="myfont flex flex-col lg:flex-row justify-between items-center m-2 mx-5">
         <div className="flex w-full lg:w-auto items-center justify-between">
           <a href="/" className="text-lg">
             <span className="font-bold text-slate-800">Web</span>

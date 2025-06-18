@@ -3,7 +3,6 @@ import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
-// import ok from "highlight.js/lib/languages/env";
 
 import "highlight.js/styles/base16/ir-black.css";
 
@@ -36,20 +35,11 @@ function Body({ content }) {
 
   useEffect(() => {
     (async () => {
-      content = content.replace(/^---[\s\S]*?^---\s*/m, "");
       const mdxSource = await serialize(content);
       setSource(mdxSource);
     })();
   }, []);
 
-  // const sanitizeSlug = slug.replace(/-/g, "_");
-  // const BlogComp = allPages[sanitizeSlug];
-  // const htmlString = renderToString(<BlogComp />);
-  // const modifiedHtml = htmlString
-  //   .replace(/<h2[^>]*>[\s\S]*?<\/h2>/, "")
-  //   .replace(/<hr\s*\/?>/, "");
-
-  // return <div dangerouslySetInnerHTML={{ __html: modifiedHtml }} />;
   return source && <MDXRemote {...source} />;
 }
 
