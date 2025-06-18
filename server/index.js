@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const yaml = require("js-yaml");
 require("dotenv").config();
 
 const connectMongoDB = require("./database/connection.js");
@@ -40,6 +41,37 @@ app.get("/:blog", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Unable to fetch blog" });
+  }
+});
+
+app.post("/related", async (req, res) => {
+  await connectMongoDB();
+  const { tags, slug } = req.body;
+
+  function extractTagsFromContent(content) {
+    const match = content.match(/^---\s*([\s\S]*?)\s*---/);
+    if (match) {
+      try {
+        const frontmatter = yaml.load(match[1]);
+        return frontmatter.tags || [];
+      } catch (err) {
+        return [];
+      }
+    }
+    return [];
+  }
+
+  try {
+    const blogs = await BlogModel.find({});
+    const tagFiltered = blogs.filter((doc) => {
+      const temptags = extractTagsFromContent(doc.content);
+      return temptags.some((tag) => tags.includes(tag));
+    });
+    const filtered = tagFiltered.filter((doc) => doc.slug !== slug);
+    res.status(200).json({ message: "Blogs fetched successfully", filtered });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Unable to get blogs" });
   }
 });
 

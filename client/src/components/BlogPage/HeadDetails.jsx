@@ -1,4 +1,5 @@
 import GenerateDate from "../../lib/GenerateDate";
+import Tags from "./Tags";
 
 function HeadDetails({ frontmatter }) {
   return (
@@ -15,18 +16,7 @@ function HeadDetails({ frontmatter }) {
         >
           {GenerateDate(frontmatter.date)}
         </time>
-        <div className="flex gap-3">
-          {frontmatter.tags.map((tag) => {
-            return (
-              <span
-                className="leading-[1] font-semibold text-sm p-1 px-1.5 rounded-lg bg-gray-200"
-                key={tag}
-              >
-                {tag}
-              </span>
-            );
-          })}
-        </div>
+        <Tags tags={frontmatter.tags} />
       </div>
     </div>
   );
