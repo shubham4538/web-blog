@@ -30,9 +30,7 @@ function Blogs() {
   return matter ? (
     <div className="myfont px-5 mx-auto max-w-7xl">
       <div className="mt-16 text-center">
-        <h1 className="text-4xl lg:text-5xl font-bold lg:tracking-tight">
-          My Blogs
-        </h1>
+        <h1 className="lg:tracking-tight">My Blogs</h1>
         <p className="text-lg mt-4 text-slate-600">
           We write about building startups and thoughts going on our mind.
         </p>

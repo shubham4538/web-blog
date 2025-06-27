@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import matter from "gray-matter";
 import CryptoJS from "crypto-js";
 import axios from "axios";
@@ -36,10 +35,12 @@ function BlogPage() {
   }, []);
 
   useEffect(() => {
-    // axios.post(`https://server-webblog.vercel.app/related`).then((response) => {
     if (!frontmatter) return;
     axios
-      .post(`http://localhost:3001/related`, { tags: frontmatter?.tags, slug })
+      .post(`https://server-webblog.vercel.app/related`, {
+        tags: frontmatter?.tags,
+        slug,
+      })
       .then((response) => {
         setRelatedBlogs(response.data.filtered);
       });
@@ -77,18 +78,6 @@ function BlogPage() {
   return !loading ? (
     <div className="myfont text-gray-900">
       <div className="blog max-w-3xl mx-auto mt-10 px-5">
-        {/* Head */}
-        <Helmet>
-          <meta
-            name="google-adsense-account"
-            content="ca-pub-8226681368050252"
-          ></meta>
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8226681368050252"
-            crossorigin="anonymous"
-          ></script>
-        </Helmet>
         {/* Blog details */}
         <HeadDetails frontmatter={frontmatter} />
 
@@ -149,7 +138,7 @@ function BlogPage() {
 
       {/* Related Courses */}
       <div className="p-5">
-        <h2>Related Blogs</h2>
+        <h1>Related Blogs</h1>
         {relatedBlogs && relatedBlogs.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {relatedBlogs.map((blog) => (

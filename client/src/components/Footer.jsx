@@ -14,7 +14,7 @@ function Footer() {
           rel="noopener"
           className="hover:underline"
         >
-          No More Anonymous
+          Anonymous
         </a>
       </p>
     </footer>
