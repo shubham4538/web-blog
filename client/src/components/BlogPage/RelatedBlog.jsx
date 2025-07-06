@@ -5,7 +5,7 @@ import Tags from "./Tags";
 
 function RelatedBlog({ blog }) {
   const { content, data } = matter(blog.content);
-  console.log(data);
+
   return (
     <div className="border rounded-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
       <Link to={`/blog/${blog.slug}`}>

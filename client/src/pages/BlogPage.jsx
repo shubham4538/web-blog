@@ -62,7 +62,7 @@ function BlogPage() {
       axios
         .get(`https://linkmanurl.vercel.app/api/click/getlink/${encryptedCode}`)
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           localStorage.removeItem("short-code");
           window.open(response.data.link, "_blank");
           setLinkLoading(false);
