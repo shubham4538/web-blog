@@ -116,7 +116,7 @@ function BlogPage() {
             />
             <div className="flex flex-col">
               <div className="text-xs font-semibold text-gray-600">AUTHOR</div>
-              <div className="text-lg font-semibold">Anonymous</div>
+              <div className="text-lg font-semibold">Shubham</div>
             </div>
           </div>
         </div>

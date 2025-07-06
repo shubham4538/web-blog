@@ -18,7 +18,7 @@ function Hero() {
           updates. From beginners to pros, find everything you need to build and
           innovate for the web!
         </p>
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        {/* <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <Link
             to="https://shubham4538.github.io/Portfolio/"
             className="bg-black text-white p-3 px-5 rounded-md flex gap-1 justify-center"
@@ -33,7 +33,7 @@ function Hero() {
             <i className="fa-brands fa-github w-5 h-5"></i>
             GitHub
           </Link>
-        </div>
+        </div> */}
       </div>
     </main>
   );

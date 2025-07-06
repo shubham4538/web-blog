@@ -90,7 +90,7 @@ function Blogs() {
                             className="w-10 h-10 rounded-full"
                           />
                           <div className="">
-                            <div className="font-semibold">Anonymous</div>
+                            <div className="font-semibold">Shubham</div>
                             <div className="text-sm text-gray-700">
                               Software Developer
                             </div>

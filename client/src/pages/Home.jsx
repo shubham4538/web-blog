@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 
 function Home() {
   return (
-    <div className="px-5 mx-auto max-w-7xl">
+    <div className="px-5 mx-auto max-w-5xl">
       <Hero />
       <div className="myfont bg-black p-8 md:px-20 md:py-20 mx-auto rounded-lg flex flex-col items-center text-center">
         <h2 className="text-white text-4xl md:text-6xl tracking-tight">
