@@ -3,8 +3,24 @@
 @tailwind utilities;
 
 @font-face {
+  font-family: "Light";
+  src: url("../assets/fonts/StudioFeixenSansTRIAL-Light.ttf");
+}
+@font-face {
   font-family: "Regular";
   src: url("../assets/fonts/StudioFeixenSansTRIAL-Regular.ttf");
+}
+@font-face {
+  font-family: "Medium";
+  src: url("../assets/fonts/StudioFeixenMonoTRIAL-Medium.ttf");
+}
+@font-face {
+  font-family: "SemiBold";
+  src: url("../assets/fonts/StudioFeixenSansTRIAL-SemiBold.ttf");
+}
+@font-face {
+  font-family: "Bold";
+  src: url("../assets/fonts/StudioFeixenSansTRIAL-Bold.ttf");
 }
 
 blockquote,
@@ -32,6 +48,21 @@ li {
 
 .myfont {
   font-family: "Regular";
+}
+.font-r {
+  font-family: "Regular";
+}
+.font-l {
+  font-family: "Light";
+}
+.font-m {
+  font-family: "Medium";
+}
+.font-sb {
+  font-family: "SemiBold";
+}
+.font-b {
+  font-family: "Bold";
 }
 
 h1 {

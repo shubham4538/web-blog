@@ -7,9 +7,9 @@ import axios from "axios";
 import HeadDetails from "../components/BlogPage/HeadDetails";
 import Body from "../components/BlogPage/Body";
 import LinkBlock from "../components/LinkBlock";
+import RelatedBlog from "../components/BlogPage/RelatedBlog";
 
 import "../styles/blogpage.css";
-import RelatedBlog from "../components/BlogPage/RelatedBlog";
 
 function BlogPage() {
   const [continueButton, setContinueButton] = useState(false);
@@ -137,7 +137,7 @@ function BlogPage() {
       </div>
 
       {/* Related Courses */}
-      <div className="p-5">
+      <div className="p-5 max-w-5xl mx-auto">
         <h1>Related Blogs</h1>
         {relatedBlogs && relatedBlogs.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
-import "./styles/index.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -11,6 +10,10 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Sample from "./pages/Sample";
 import SampleTextFile from "./pages/SampleTextFile";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
+
+import "./styles/index.css";
 
 function Router() {
   const location = useLocation();
@@ -29,6 +32,8 @@ function Router() {
         <Route path={"/sample"} element={<Sample />} />
         <Route path={"/edit/:blog"} element={<SampleTextFile />} />
         <Route path={"/code"} element={<ShortCode />} />
+        <Route path={"/privacy-policy"} element={<PrivacyPolicy />} />
+        <Route path={"/terms"} element={<Terms />} />
       </Routes>
       {!shouldHideLayout && <Footer />}
     </>

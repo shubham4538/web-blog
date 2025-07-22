@@ -1,0 +1,17 @@
+.blog-block {
+  @apply hover:scale-[103%] transition-all duration-200 h-full bg-gray-200 rounded-xl;
+}
+.category-block {
+  @apply p-10 text-2xl text-center cursor-pointer hover:scale-105 transition-all duration-200 rounded-md text-white;
+  background-size: cover;
+  background-position: center;
+}
+.hero-bg {
+  background-image: url("../assets/images/bg.png");
+  background-size: cover;
+  background-position: center;
+}
+.hero-content {
+  background: linear-gradient(315deg, #b6e8fb, #cdaaf6);
+  /* backdrop-filter: blur(5px); */
+}
