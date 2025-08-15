@@ -54,14 +54,18 @@ function LinkBlock({ setContinueButton, setNextLink }) {
         <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
       </a> */}
       {/* <!-- Timer Ads --> */}
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8226681368050252"
+        crossOrigin="anonymous"
+      ></script>
       <ins
         className="adsbygoogle"
-        style={{ display: "block" }}
+        style={{ display: "block", textAlign: "center" }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
         data-ad-client="ca-pub-8226681368050252"
-        data-ad-slot="7191414055"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-        onClick={imageCliked}
+        data-ad-slot="6251606558"
       ></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
