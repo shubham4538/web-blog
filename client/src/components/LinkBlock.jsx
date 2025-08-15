@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import GoogleImage from "../assets/images/googleads.png";
 import GenerateLink from "../lib/GenerateLink";
+import { use } from "react";
+import GoogleAds from "./GoogleAds";
 
 function LinkBlock({ setContinueButton, setNextLink }) {
   const [isTimeUp, setIsTimeUp] = useState(false);
@@ -54,20 +56,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
         <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
       </a> */}
       {/* <!-- Timer Ads --> */}
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8226681368050252"
-        crossOrigin="anonymous"
-      ></script>
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", textAlign: "center" }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client="ca-pub-8226681368050252"
-        data-ad-slot="6251606558"
-      ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <GoogleAds data={"data2"} />
 
       <div className="text-center">
         {!isTimeUp ? (

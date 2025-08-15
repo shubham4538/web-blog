@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import matter from "gray-matter";
 import CryptoJS from "crypto-js";
 import axios from "axios";
+import AdSense from "react-adsense";
 
 import HeadDetails from "../components/BlogPage/HeadDetails";
 import Body from "../components/BlogPage/Body";
@@ -10,6 +11,7 @@ import LinkBlock from "../components/LinkBlock";
 import RelatedBlog from "../components/BlogPage/RelatedBlog";
 
 import "../styles/blogpage.css";
+import GoogleAds from "../components/GoogleAds";
 
 function BlogPage() {
   const [continueButton, setContinueButton] = useState(false);
@@ -88,22 +90,7 @@ function BlogPage() {
             setNextLink={setNextLink}
           />
         ) : (
-          <>
-            <script
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8226681368050252"
-              crossOrigin="anonymous"
-            ></script>
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block", textAlign: "center" }}
-              data-ad-layout="in-article"
-              data-ad-format="fluid"
-              data-ad-client="ca-pub-8226681368050252"
-              data-ad-slot="6251606558"
-            ></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          </>
+          <GoogleAds data={"data"} />
         )}
 
         {/* Blog Data */}
