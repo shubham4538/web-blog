@@ -27,7 +27,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
   }, []);
 
   const imageCliked = () => {
-    const startTime = Date().now() + 17000;
+    const startTime = Date.now() + 17000;
     localStorage.setItem("start-time", startTime);
   };
 
