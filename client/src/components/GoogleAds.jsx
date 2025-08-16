@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function GoogleAds({ data, imageCliked }) {
+function GoogleAds({ data }) {
   useEffect(() => {
     try {
       window.adsbygoogle = window.adsbygoogle || [];
@@ -11,7 +11,7 @@ function GoogleAds({ data, imageCliked }) {
   }, [data]);
 
   return (
-    <div key={data} onClick={imageCliked}>
+    <div key={data}>
       <ins
         className="adsbygoogle"
         style={{ display: "block", textAlign: "center" }}

@@ -46,7 +46,6 @@ function LinkBlock({ setContinueButton, setNextLink }) {
         <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
       </a>
       {/* <!-- Timer Ads --> */}
-      <GoogleAds data={"data2"} imageCliked={imageCliked} />
       <div className="text-center">
         {remaining === null && <p>Click the ad and wait 15 seconds</p>}
 
@@ -54,11 +53,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
 
         {remaining === 0 && <p>Scroll down to continue</p>}
       </div>
-
-      <div className="text-center"></div>
-      <a href="/wed" target="_blank">
-        <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
-      </a>
+      <GoogleAds data={"data2"} onClick={imageCliked} />
     </div>
   );
 }
