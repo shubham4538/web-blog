@@ -12,9 +12,12 @@ function ShortCode() {
     if (location.search) {
       const params = searchParams.get("lc");
       if (params) {
-        console.log(params);
+        localStorage.setItem(
+          "short-code",
+          JSON.stringify({ step: 1, code: params })
+        );
         const link = GenerateLink();
-        navigate(link, { state: { code: params } });
+        navigate(link);
       }
     } else {
       navigate("/");

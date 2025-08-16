@@ -3,7 +3,6 @@ import { useParams, useLocation } from "react-router-dom";
 import matter from "gray-matter";
 import CryptoJS from "crypto-js";
 import axios from "axios";
-import AdSense from "react-adsense";
 
 import HeadDetails from "../components/BlogPage/HeadDetails";
 import Body from "../components/BlogPage/Body";
@@ -14,15 +13,14 @@ import "../styles/blogpage.css";
 import GoogleAds from "../components/GoogleAds";
 
 function BlogPage() {
-  const [continueButton, setContinueButton] = useState(false);
-  const [linkLoading, setLinkLoading] = useState(false);
-  const [frontmatter, setFrontmatter] = useState();
-  const [relatedBlogs, setRelatedBlogs] = useState([]);
+  const { slug } = useParams();
   const [content, setContent] = useState();
   const [loading, setLoading] = useState(true);
+  const [frontmatter, setFrontmatter] = useState();
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [nextLink, setNextLink] = useState("");
-  const { slug } = useParams();
-  const { state } = useLocation();
+  const [linkLoading, setLinkLoading] = useState(false);
+  const [continueButton, setContinueButton] = useState(false);
   const localState = JSON.parse(localStorage.getItem("short-code"));
 
   useEffect(() => {
@@ -56,9 +54,12 @@ function BlogPage() {
   }
 
   const stepTwo = () => {
-    if (state) {
-      localStorage.setItem("short-code", JSON.stringify({ code: state.code }));
-    } else if (localState) {
+    if (localState.step == 1) {
+      localStorage.setItem(
+        "short-code",
+        JSON.stringify({ step: 2, code: localState.code })
+      );
+    } else if (localState.step == 2) {
       setLinkLoading(true);
       const encryptedCode = encryptData(localState.code);
       axios
@@ -72,9 +73,6 @@ function BlogPage() {
       return;
     }
     window.open(nextLink, "_blank");
-    // navigate(nextLink, {
-    //   state: { code: state.code, step: 2 },
-    // });
   };
 
   return !loading ? (
@@ -84,7 +82,7 @@ function BlogPage() {
         <HeadDetails frontmatter={frontmatter} />
 
         {/* Linkman timer or Ads */}
-        {state || localState ? (
+        {localState ? (
           <LinkBlock
             setContinueButton={setContinueButton}
             setNextLink={setNextLink}
@@ -115,7 +113,7 @@ function BlogPage() {
 
         {/* Linkman continue button */}
         <div className="text-center">
-          {(state || localState) && continueButton && (
+          {localState && continueButton && (
             <button
               onClick={stepTwo}
               className="w-max p-2 px-3 rounded-md text-center text-white bg-sky-400"
