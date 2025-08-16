@@ -11,7 +11,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
   useEffect(() => {
     if (!timer) return;
 
-    const elapsed = Math.floor((new Date.now().getTime() - timer) / 1000);
+    const elapsed = Math.floor((timer - Date.now()) / 1000);
     const newRemaining = remaining - elapsed;
 
     if (newRemaining <= 0) {
@@ -27,7 +27,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
   }, []);
 
   const imageCliked = () => {
-    const startTime = new Date().getTime() + 17000;
+    const startTime = Date().now() + 17000;
     localStorage.setItem("start-time", startTime);
   };
 
