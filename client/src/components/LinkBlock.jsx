@@ -11,7 +11,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
   useEffect(() => {
     if (!timer) return;
 
-    const elapsed = Math.floor((Date.now().getTime() - timer) / 1000);
+    const elapsed = Math.floor((new Date.now().getTime() - timer) / 1000);
     const newRemaining = remaining - elapsed;
 
     if (newRemaining <= 0) {
