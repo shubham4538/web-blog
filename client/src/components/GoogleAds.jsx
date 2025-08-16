@@ -4,14 +4,16 @@ function GoogleAds({ data }) {
   useEffect(() => {
     try {
       window.adsbygoogle = window.adsbygoogle || [];
-      window.adsbygoogle.push({});
+      if (window.adsbygoogle.loaded === false) {
+        window.adsbygoogle.push({});
+      }
     } catch (e) {
       console.error("Google Ads Error:", e);
     }
-  }, [data]);
+  }, []);
 
   return (
-    <div key={data}>
+    <div>
       <ins
         className="adsbygoogle"
         style={{ display: "block", textAlign: "center" }}
