@@ -3,72 +3,24 @@ import { useLocation } from "react-router-dom";
 
 import GoogleImage from "../assets/images/googleads.png";
 import GenerateLink from "../lib/GenerateLink";
-import { use } from "react";
 import GoogleAds from "./GoogleAds";
 
 function LinkBlock({ setContinueButton, setNextLink }) {
-  const [isTimeUp, setIsTimeUp] = useState(false);
-  const [startTime, setStartTime] = useState(Date.now());
-  const [remainingTime, setRemainingTime] = useState(null);
   const { state } = useLocation();
 
-  // Clear state after 5 minutes
-  // window.history.replaceState({}, '')
-
-  const endTimer = () => {
-    setIsTimeUp(true);
-    setContinueButton(true);
-    if (state) {
-      const link = GenerateLink();
-      setNextLink(link);
-    }
-  };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-
-      if (elapsedTime > 20) {
-        clearInterval(timer);
-        endTimer();
-      }
-      if (remainingTime !== null) {
-        setRemainingTime(16 - elapsedTime);
-      }
-      if (elapsedTime == 16) {
-        endTimer();
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [remainingTime]);
-
   const imageCliked = () => {
-    if (remainingTime == null) {
-      setRemainingTime(15);
-      setStartTime(Date.now());
-    }
+    console.log(state);
   };
 
   return (
     <div>
-      {/* <a href="/wed" target="_blank">
+      <a href="/wed">
         <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
-      </a> */}
+      </a>
       {/* <!-- Timer Ads --> */}
-      <GoogleAds data={"data2"} />
+      <GoogleAds data={"data2"} imageCliked={imageCliked} />
 
-      <div className="text-center">
-        {!isTimeUp ? (
-          remainingTime ? (
-            <p>Wait for {remainingTime} seconds...</p>
-          ) : (
-            <p>Click the ad above or below and wait for 15 seconds...</p>
-          )
-        ) : (
-          <p>scroll down and click continue</p>
-        )}
-      </div>
+      <div className="text-center"></div>
       <a href="/wed" target="_blank">
         <img src={GoogleImage} alt="google-ads" onClick={imageCliked} />
       </a>
