@@ -32,7 +32,7 @@ function GoogleAds({ imageClicked }) {
       <div
         className="border border-gray-600 mt-2"
         onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+        onMouseLeave={imageClicked}
       >
         <ins
           className="adsbygoogle"
