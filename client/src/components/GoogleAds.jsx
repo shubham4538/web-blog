@@ -4,9 +4,7 @@ function GoogleAds({ data }) {
   useEffect(() => {
     try {
       window.adsbygoogle = window.adsbygoogle || [];
-      if (window.adsbygoogle.loaded === false) {
-        window.adsbygoogle.push({});
-      }
+      window.adsbygoogle.push({});
     } catch (e) {
       console.error("Google Ads Error:", e);
     }
