@@ -42,7 +42,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
 
   return (
     <div>
-      <GoogleAds />
+      <GoogleAds imageCliked={imageCliked} />
       {/* <!-- Timer Ads --> */}
       <div className="text-center">
         {remaining === null && <p>Click the ad and wait 15 seconds</p>}
@@ -51,7 +51,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
 
         {remaining === 0 && <p>Scroll down to continue</p>}
       </div>
-      <GoogleAds />
+      <GoogleAds imageCliked={imageCliked} />
     </div>
   );
 }

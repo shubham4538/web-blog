@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function GoogleAds() {
+function GoogleAds({ imageClicked }) {
   const [hover, setHover] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function GoogleAds() {
   useEffect(() => {
     const handleBlur = () => {
       if (hover) {
-        alert("Blur on ad hover");
+        imageClicked();
       }
     };
 
