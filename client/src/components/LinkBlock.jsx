@@ -10,7 +10,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
 
   useEffect(() => {
     if (!timer) return;
-    const endTime = parseInt(saved, 10);
+    const endTime = parseInt(timer, 10);
 
     const tick = () => {
       const newRemaining = Math.floor((endTime - Date.now()) / 1000);
