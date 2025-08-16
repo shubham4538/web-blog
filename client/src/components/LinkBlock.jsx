@@ -25,7 +25,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
     tick();
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [timer]);
 
   const imageCliked = () => {
     const startTime = Date.now() + 17000;
