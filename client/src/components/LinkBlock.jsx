@@ -48,14 +48,10 @@ function LinkBlock({ setContinueButton, setNextLink }) {
       {/* <!-- Timer Ads --> */}
       <GoogleAds data={"data2"} imageCliked={imageCliked} />
       <div className="text-center">
-        {timer ? (
-          <p className="text-gray-500 text-sm">
-            You can continue in {remaining} seconds
-          </p>
+        {remaining !== null && remaining > 0 ? (
+          <p>You can continue in {remaining} seconds</p>
         ) : (
-          <p className="text-gray-500 text-sm">
-            Click the ad to and wait 15 seconds
-          </p>
+          <p>Click the ad and wait 17 seconds</p>
         )}
       </div>
 
