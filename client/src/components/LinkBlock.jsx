@@ -28,6 +28,7 @@ function LinkBlock({ setContinueButton, setNextLink }) {
   }, [timer]);
 
   const imageCliked = () => {
+    console.log("function called");
     const startTime = Date.now() + 17000;
     localStorage.setItem("start-time", startTime);
     setRemaining(17);

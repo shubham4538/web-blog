@@ -15,6 +15,7 @@ function GoogleAds({ imageClicked }) {
   useEffect(() => {
     const handleBlur = () => {
       if (hover) {
+        console.log("Ad clicked");
         imageClicked();
       }
     };
