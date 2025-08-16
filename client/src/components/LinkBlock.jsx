@@ -5,30 +5,32 @@ import GenerateLink from "../lib/GenerateLink";
 import GoogleAds from "./GoogleAds";
 
 function LinkBlock({ setContinueButton, setNextLink }) {
-  const [remaining, setRemaining] = useState(17);
+  const [remaining, setRemaining] = useState(null);
   const timer = localStorage.getItem("start-time");
 
   useEffect(() => {
     if (!timer) return;
+    const endTime = parseInt(saved, 10);
 
-    const elapsed = Math.floor((timer - Date.now()) / 1000);
-    const newRemaining = remaining - elapsed;
+    const tick = () => {
+      const newRemaining = Math.floor((endTime - Date.now()) / 1000);
 
-    if (newRemaining <= 0) {
-      endTimer();
-    } else {
-      setRemaining(newRemaining);
-    }
+      if (newRemaining <= 0) {
+        endTimer();
+      } else {
+        setRemaining(newRemaining);
+      }
+    };
 
-    const tick = () => {};
+    tick();
     const interval = setInterval(tick, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
   const imageCliked = () => {
     const startTime = Date.now() + 17000;
     localStorage.setItem("start-time", startTime);
+    setRemaining(17);
   };
 
   const endTimer = () => {
