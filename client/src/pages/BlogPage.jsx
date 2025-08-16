@@ -88,7 +88,7 @@ function BlogPage() {
             setNextLink={setNextLink}
           />
         ) : (
-          <GoogleAds data={"data"} />
+          <GoogleAds />
         )}
 
         {/* Blog Data */}

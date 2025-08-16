@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-function GoogleAds({ data }) {
+function GoogleAds() {
+  const [hover, setHover] = useState(false);
+
   useEffect(() => {
     try {
       window.adsbygoogle = window.adsbygoogle || [];
@@ -10,17 +12,37 @@ function GoogleAds({ data }) {
     }
   }, []);
 
+  useEffect(() => {
+    const handleBlur = () => {
+      if (hover) {
+        alert("Blur on ad hover");
+      }
+    };
+
+    window.addEventListener("visibilitychange", handleBlur);
+
+    return () => {
+      window.removeEventListener("visibilitychange", handleBlur);
+    };
+  }, [hover]);
+
   return (
-    <div>
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", textAlign: "center" }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client="ca-pub-8226681368050252"
-        data-ad-slot="6251606558"
-      ></ins>
-    </div>
+    <>
+      <div
+        className="border border-gray-600 mt-2"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block", textAlign: "center" }}
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-8226681368050252"
+          data-ad-slot="6251606558"
+        ></ins>
+      </div>
+    </>
   );
 }
 
