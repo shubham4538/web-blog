@@ -49,10 +49,12 @@ function LinkBlock({ setContinueButton, setNextLink }) {
       <GoogleAds data={"data2"} imageCliked={imageCliked} />
       <div className="text-center">
         {remaining !== null && remaining > 0 ? (
-          <p>You can continue in {remaining} seconds</p>
+          <p>Click the button after {remaining} seconds</p>
         ) : (
           <p>Click the ad and wait 17 seconds</p>
         )}
+
+        {remaining == 0 && <p>Scroll down to continue</p>}
       </div>
 
       <div className="text-center"></div>
