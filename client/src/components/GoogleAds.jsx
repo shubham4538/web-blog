@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function GoogleAds({ imageClicked }) {
-  const [hover, setHover] = useState(false);
+  // const [hover, setHover] = useState(false);
 
   useEffect(() => {
     try {
@@ -12,27 +12,27 @@ function GoogleAds({ imageClicked }) {
     }
   }, []);
 
-  useEffect(() => {
-    const handleBlur = () => {
-      if (hover) {
-        console.log("Ad clicked");
-        imageClicked();
-      }
-    };
+  // useEffect(() => {
+  //   const handleBlur = () => {
+  //     if (hover) {
+  //       console.log("Ad clicked");
+  //       imageClicked();
+  //     }
+  //   };
 
-    window.addEventListener("visibilitychange", handleBlur);
+  //   window.addEventListener("visibilitychange", handleBlur);
 
-    return () => {
-      window.removeEventListener("visibilitychange", handleBlur);
-    };
-  }, [hover]);
+  //   return () => {
+  //     window.removeEventListener("visibilitychange", handleBlur);
+  //   };
+  // }, [hover]);
 
   return (
     <>
       <div
-        className="border border-gray-600 mt-2"
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={imageClicked}
+        className="border border-gray-600"
+        // onMouseEnter={() => setHover(true)}
+        // onMouseLeave={imageClicked}
       >
         <ins
           className="adsbygoogle"

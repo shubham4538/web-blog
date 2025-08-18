@@ -86,6 +86,7 @@ function BlogPage() {
           <LinkBlock
             setContinueButton={setContinueButton}
             setNextLink={setNextLink}
+            step={localState.step}
           />
         ) : (
           <GoogleAds />
@@ -112,15 +113,17 @@ function BlogPage() {
         </div>
 
         {/* Linkman continue button */}
-        <div className="text-center">
+        <div className="text-center" id="continue-button">
+          <GoogleAds />
           {localState && continueButton && (
             <button
               onClick={stepTwo}
-              className="w-max p-2 px-3 rounded-md text-center text-white bg-sky-400"
+              className="px-1 border text-black border-gray-700 bg-blue-400"
             >
               {linkLoading ? "Loading..." : "Continue"}
             </button>
           )}
+          <GoogleAds />
         </div>
 
         {/* <Link to={"/blogs"}>{`<- back`}</Link> */}
