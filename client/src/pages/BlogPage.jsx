@@ -54,6 +54,8 @@ function BlogPage() {
   }
 
   const stepTwo = () => {
+    localStorage.removeItem("timer-finished");
+
     if (localState.step == 1) {
       localStorage.setItem(
         "short-code",

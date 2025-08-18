@@ -54,16 +54,14 @@ function LinkBlock({ setContinueButton, setNextLink, step }) {
       <div>{step === 1 ? <span>Step 1/2</span> : <span>Step 2/2</span>}</div>
       <GoogleAds />
       {remaining > 0 && <span>Double Tap after {remaining} seconds</span>}
-      {timerFinished && <span>Double Tap the button below</span>}
       <GoogleAds />
-      {remaining === 0 ||
-        (timerFinished && (
-          <a href="#continue-button">
-            <button className="px-1 mt-1 border text-black border-gray-700 bg-blue-400">
-              Double Tap ⬇
-            </button>
-          </a>
-        ))}
+      {timerFinished && (
+        <a href="#continue-button">
+          <button className="px-1 mt-1 border text-black border-gray-700 bg-blue-400">
+            Double Tap ⬇
+          </button>
+        </a>
+      )}
     </div>
   );
 }

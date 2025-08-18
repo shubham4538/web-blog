@@ -5,6 +5,7 @@ import remarkParseFrontmatter from "remark-parse-frontmatter";
 import remarkFrontmatter from "remark-frontmatter";
 import { remark } from "remark";
 
+import GoogleAdsFluid from "../components/GoogleAdsFluid.jsx";
 import GenerateDate from "../lib/GenerateDate.js";
 import Loading from "../components/Loading.jsx";
 
@@ -118,6 +119,7 @@ function Blogs() {
         </div>
       </div>
       <main className="flex flex-col gap-5 md:gap-8 m-auto max-w-[35rem] py-5 md:p-10 md:max-w-[50rem] lg:max-w-[65rem]">
+        <GoogleAdsFluid />
         {matter
           .sort(
             (a, b) =>
