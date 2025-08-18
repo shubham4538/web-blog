@@ -15,7 +15,7 @@ function GoogleAds() {
       <div className="border border-gray-600">
         <ins
           className="adsbygoogle"
-          style="display:block;"
+          style={{ display: "block" }}
           data-ad-client="ca-pub-8226681368050252"
           data-ad-slot="7191414055"
           data-ad-format="auto"
