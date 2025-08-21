@@ -21,7 +21,7 @@ function BlogPage() {
   const [nextLink, setNextLink] = useState("");
   const [linkLoading, setLinkLoading] = useState(false);
   const [continueButton, setContinueButton] = useState(false);
-  const localState = JSON.parse(localStorage.getItem("short-code"));
+  const localState = JSON.parse(sessionStorage.getItem("short-code"));
 
   useEffect(() => {
     axios.get(`https://server-webblog.vercel.app/${slug}`).then((response) => {
