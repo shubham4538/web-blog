@@ -12,7 +12,7 @@ function ShortCode() {
     if (location.search) {
       const params = searchParams.get("lc");
       if (params) {
-        localStorage.setItem(
+        sessionStorage.setItem(
           "short-code",
           JSON.stringify({ step: 1, code: params })
         );
