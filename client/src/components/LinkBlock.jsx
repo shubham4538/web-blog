@@ -7,7 +7,7 @@ import GoogleAds from "./GoogleAds";
 function LinkBlock({ setContinueButton, setNextLink, step }) {
   const [remaining, setRemaining] = useState(null);
   const [timer, setTimer] = useState(localStorage.getItem("start-time"));
-  const timerFinished = localStorage.getItem("timer-finished");
+  const timerFinished = sessionStorage.getItem("timer-finished");
 
   useEffect(() => {
     if (timerFinished) {
@@ -44,7 +44,7 @@ function LinkBlock({ setContinueButton, setNextLink, step }) {
     setContinueButton(true);
     setNextLink(GenerateLink());
     localStorage.removeItem("start-time");
-    localStorage.setItem("timer-finished", true);
+    sessionStorage.setItem("timer-finished", true);
     setTimer("");
     setRemaining(0);
   };

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import matter from "gray-matter";
 import CryptoJS from "crypto-js";
 import axios from "axios";
 
 import HeadDetails from "../components/BlogPage/HeadDetails";
-import Body from "../components/BlogPage/Body";
-import LinkBlock from "../components/LinkBlock";
 import RelatedBlog from "../components/BlogPage/RelatedBlog";
+import LinkBlock from "../components/LinkBlock";
 import GoogleAds from "../components/GoogleAds";
+import Body from "../components/BlogPage/Body";
+import Loading from "../components/Loading";
 
 import "../styles/blogpage.css";
 
@@ -53,9 +53,10 @@ function BlogPage() {
 
   const stepTwo = () => {
     localStorage.removeItem("timer-finished");
+    sessionStorage.removeItem("timer-finished");
 
     if (localState.step == 1) {
-      localStorage.setItem(
+      sessionStorage.setItem(
         "short-code",
         JSON.stringify({ step: 2, code: localState.code })
       );
@@ -66,7 +67,7 @@ function BlogPage() {
         .get(`https://linkmanurl.vercel.app/api/click/getlink/${encryptedCode}`)
         .then((response) => {
           console.log(response.data);
-          localStorage.removeItem("short-code");
+          sessionStorage.removeItem("short-code");
           window.open(response.data.link, "_blank");
           setLinkLoading(false);
         });
@@ -146,7 +147,7 @@ function BlogPage() {
       </div>
     </div>
   ) : (
-    <p className="text-gray-500 text-xl text-center">Loading...</p>
+    <Loading />
   );
 }
 
