@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-// import GoogleImage from "../assets/images/googleads.png";
 import GenerateLink from "../lib/GenerateLink";
 import GoogleAds from "./GoogleAds";
 
@@ -15,6 +14,7 @@ function LinkBlock({ setContinueButton, setNextLink, step }) {
       return;
     }
 
+    localStorage.removeItem("start-time");
     const startTime = Date.now() + 17000;
     localStorage.setItem("start-time", startTime);
     setTimer(startTime);
