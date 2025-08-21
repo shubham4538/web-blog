@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const yaml = require("js-yaml");
 require("dotenv").config();
+const matter = require("gray-matter");
 
 const connectMongoDB = require("./database/connection.js");
 const BlogModel = require("./database/BlogModel.js");
@@ -31,10 +31,8 @@ app.get("/:blog", async (req, res) => {
   try {
     const blogData = await BlogModel.findOne({ slug: blog });
     if (blogData) {
-      res.status(200).json({
-        message: "Blog fetched successfully",
-        blog: blogData,
-      });
+      const blog = matter(blogData.content);
+      res.status(200).json({ message: "Blog fetched!!!", blog });
     } else {
       return res.status(404).json({ message: "Blog not found" });
     }
@@ -108,5 +106,5 @@ app.post("/:blogid", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
 });

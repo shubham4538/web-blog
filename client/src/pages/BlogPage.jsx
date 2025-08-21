@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import matter from "gray-matter";
 import CryptoJS from "crypto-js";
 import axios from "axios";
@@ -8,9 +8,9 @@ import HeadDetails from "../components/BlogPage/HeadDetails";
 import Body from "../components/BlogPage/Body";
 import LinkBlock from "../components/LinkBlock";
 import RelatedBlog from "../components/BlogPage/RelatedBlog";
+import GoogleAds from "../components/GoogleAds";
 
 import "../styles/blogpage.css";
-import GoogleAds from "../components/GoogleAds";
 
 function BlogPage() {
   const { slug } = useParams();
@@ -25,9 +25,7 @@ function BlogPage() {
 
   useEffect(() => {
     axios.get(`https://server-webblog.vercel.app/${slug}`).then((response) => {
-      const { content: content, data: frontmatter } = matter(
-        response.data.blog.content
-      );
+      const { content, data: frontmatter } = response.data.blog;
       setContent(content);
       setFrontmatter(frontmatter);
       setLoading(false);
