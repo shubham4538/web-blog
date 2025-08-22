@@ -28,11 +28,16 @@ app.get("/:blog", async (req, res) => {
   await connectMongoDB();
 
   const { blog } = req.params;
+  const { edit } = req.query;
   try {
     const blogData = await BlogModel.findOne({ slug: blog });
     if (blogData) {
       const blog = matter(blogData.content);
-      res.status(200).json({ message: "Blog fetched!!!", blog });
+      if (edit) {
+        res.status(200).json({ message: "Blog fetched!!!", blog: blogData });
+      } else {
+        res.status(200).json({ message: "Blog fetched!!!", blog });
+      }
     } else {
       return res.status(404).json({ message: "Blog not found" });
     }

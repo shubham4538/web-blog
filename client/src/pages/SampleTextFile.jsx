@@ -32,7 +32,7 @@ function SampleTextFile() {
 
       try {
         const response = await axios.get(
-          `https://server-webblog.vercel.app/${blog}`
+          `https://server-webblog.vercel.app/${blog}?edit=true`
         );
         if (response.data) {
           console.log("Blog data fetched successfully:", response.data);
