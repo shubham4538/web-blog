@@ -54,13 +54,13 @@ function BlogPage() {
   const stepTwo = () => {
     localStorage.removeItem("timer-finished");
     sessionStorage.removeItem("timer-finished");
-    const newWindow = window.open();
 
     if (localState.step == 1) {
       sessionStorage.setItem(
         "short-code",
         JSON.stringify({ step: 2, code: localState.code })
       );
+      window.open(nextLink, "_blank");
     } else if (localState.step == 2) {
       setLinkLoading(true);
       const encryptedCode = encryptData(localState.code);
@@ -69,12 +69,10 @@ function BlogPage() {
         .then((response) => {
           console.log(response.data);
           sessionStorage.removeItem("short-code");
-          newWindow.location = response.data.link;
+          window.open(response.data.link, "_blank");
           setLinkLoading(false);
         });
-      return;
     }
-    window.open(nextLink, "_blank");
   };
 
   return !loading ? (
