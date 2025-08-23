@@ -44,6 +44,17 @@ function BlogPage() {
       });
   }, [frontmatter]);
 
+  useEffect(() => {
+    if (localState.step == 2) {
+      const encryptedCode = encryptData(localState.code);
+      axios
+        .get(`https://linkmanurl.vercel.app/api/click/getlink/${encryptedCode}`)
+        .then((response) => {
+          setNextLink(response.data.link);
+        });
+    }
+  }, [localState]);
+
   function encryptData(data) {
     const encryptedData = encodeURIComponent(
       CryptoJS.AES.encrypt(data, "linkmansecret").toString()
@@ -60,19 +71,8 @@ function BlogPage() {
         "short-code",
         JSON.stringify({ step: 2, code: localState.code })
       );
-      window.open(nextLink, "_blank");
-    } else if (localState.step == 2) {
-      setLinkLoading(true);
-      const encryptedCode = encryptData(localState.code);
-      axios
-        .get(`https://linkmanurl.vercel.app/api/click/getlink/${encryptedCode}`)
-        .then((response) => {
-          console.log(response.data);
-          sessionStorage.removeItem("short-code");
-          window.open(response.data.link, "_blank");
-          setLinkLoading(false);
-        });
     }
+    window.open(nextLink, "_blank");
   };
 
   return !loading ? (
