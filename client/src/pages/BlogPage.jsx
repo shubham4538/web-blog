@@ -54,6 +54,7 @@ function BlogPage() {
   const stepTwo = () => {
     localStorage.removeItem("timer-finished");
     sessionStorage.removeItem("timer-finished");
+    const newWindow = window.open();
 
     if (localState.step == 1) {
       sessionStorage.setItem(
@@ -68,7 +69,7 @@ function BlogPage() {
         .then((response) => {
           console.log(response.data);
           sessionStorage.removeItem("short-code");
-          window.open(response.data.link, "_blank");
+          newWindow.location = response.data.link;
           setLinkLoading(false);
         });
       return;
