@@ -45,7 +45,7 @@ function BlogPage() {
   }, [frontmatter]);
 
   useEffect(() => {
-    if (localState.step == 2) {
+    if (localState?.step == 2) {
       const encryptedCode = encryptData(localState.code);
       axios
         .get(`https://linkmanurl.vercel.app/api/click/getlink/${encryptedCode}`)
@@ -66,7 +66,7 @@ function BlogPage() {
     localStorage.removeItem("timer-finished");
     sessionStorage.removeItem("timer-finished");
 
-    if (localState.step == 1) {
+    if (localState?.step == 1) {
       sessionStorage.setItem(
         "short-code",
         JSON.stringify({ step: 2, code: localState.code })
